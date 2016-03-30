@@ -47,7 +47,7 @@ actions.include(__dirname + '/lib/includes');
 
 function log (message) {
 	console.log(message);
-	if (win) window.webContents.send("log", message);
+	if (win) win.webContents.send("log", message);
 }
 
 electron.ipcMain.on('getRootDir', (e) => {
