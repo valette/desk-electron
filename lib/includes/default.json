@@ -1,0 +1,6 @@
+{
+	"include":[
+		"dev/dev.json",
+		"demos/demos.json"
+	]
+}
