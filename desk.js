@@ -47,7 +47,6 @@ actions.include(__dirname + '/lib/includes');
 
 function log (message) {
 	console.log(message);
-	if (win) win.webContents.send("log", message);
 }
 
 electron.ipcMain.on('getRootDir', (e) => {
@@ -58,8 +57,14 @@ electron.ipcMain.on('getRootDir', (e) => {
 			event.sender.send("action finished", response);
 		});
 	})
-	.on('setEmitLog', function (log) {
-		actions.setEmitLog(log);
+	.on('setEmitLog', function (event, bool) {
+		actions.setEmitLog(bool);
 	});
 
-actions.on('log', log);
+actions.on("log", console.log.bind(console));
+
+actions.oldEmit = actions.emit;
+actions.emit = function (event, message) {
+	actions.oldEmit(event, message);
+	if (win) win.webContents.send(event, message);
+}
