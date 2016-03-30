@@ -4,7 +4,7 @@
   "license" : "CECILL-B",
   "main": "desk.js",
   "author": "Sebastien Valette <sebastien.valette@creatis.insa-lyon.fr> (http://www.creatis.insa-lyon.fr/~valette)",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/valette/desk-electron.git"
@@ -12,7 +12,8 @@
   "dependencies": {
     "desk-base": ">0.0.0",
     "desk-ui": ">0.0.0",
-    "electron-prebuilt": ">0.0.0"
+    "electron-prebuilt": ">0.0.0",
+    "shelljs": ">0.0.0"
   },
   "optionalDependencies": {},
   "engines": {
