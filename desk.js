@@ -12,59 +12,52 @@ process.argv.forEach(value => {
 	if (value === "debug") debug = true;
 });
 
-function createWindow () {
-	win = new electron.BrowserWindow({width: 800, height: 600});
+electron.app.setName('desk');
+electron.app.on('ready', () => {
+	win = new electron.BrowserWindow({
+		icon: 'node_modules/desk-ui/lib/ui/source/resource/desk/desk.png'
+	});
 
-	var url = debug ? ('file://' + __dirname + '/node_modules/desk-ui/source/index.html')
-		: 'file://' + __dirname + '/node_modules/desk-ui/build/index.html';
+	var url = 'file://' + __dirname + '/node_modules/desk-ui/'
+		+ (debug ? 'source' : 'build')
+		+ '/index.html';
 
 	win.loadURL(url);
 
-	if (debug) win.webContents.openDevTools();
-
-	win.on('closed', function() {
-		win = null;
-	});
-}
-
-electron.app.on('ready', createWindow)
-	.on('window-all-closed', function () {
-	  // On OS X it is common for applications and their menu bar
-	  // to stay active until the user quits explicitly with Cmd + Q
-	  if (process.platform !== 'darwin') {
+	win.on('closed', () => {win = null;});
+})
+.on('window-all-closed', () => {
+	// On OS X it is common for applications and their menu bar
+	// to stay active until the user quits explicitly with Cmd + Q
+	if (process.platform !== 'darwin') {
 		electron.app.quit();
-	  }
-	})
-	.on('activate', function () {
-	  // On OS X it's common to re-create a window in the app when the
-	  // dock icon is clicked and there are no other windows open.
-	  if (win === null) {
+	}
+})
+.on('activate', () => {
+	// On OS X it's common to re-create a window in the app when the
+	// dock icon is clicked and there are no other windows open.
+	if (win === null) {
 		createWindow();
-	  }
-	});
+	}
+});
 
 actions.include(__dirname + '/lib/includes');
 
-function log (message) {
-	console.log(message);
-}
-
 electron.ipcMain.on('getRootDir', (e) => {
-		e.returnValue = libPath.join(os.homedir(), 'desk') + '/';
-	})
-	.on('action', function(event, parameters) {
-		actions.execute(parameters, function (response) {
-			event.sender.send("action finished", response);
-		});
-	})
-	.on('setEmitLog', function (event, bool) {
-		actions.setEmitLog(bool);
+	e.returnValue = libPath.join(os.homedir(), 'desk') + '/';
+})
+.on('action', (event, parameters) => {
+	actions.execute(parameters, (response) => {
+		event.sender.send("action finished", response);
 	});
+})
+.on('setEmitLog', (event, bool) => {
+	actions.setEmitLog(bool);
+});
 
 actions.on("log", console.log.bind(console));
-
 actions.oldEmit = actions.emit;
-actions.emit = function (event, message) {
+actions.emit = (event, message) => {
 	actions.oldEmit(event, message);
 	if (win) win.webContents.send(event, message);
 }
