@@ -1,5 +1,6 @@
 {
   "name": "desk-electron",
+  "productName" : "desk",
   "description": "electron.js version of DESK",
   "license" : "CECILL-B",
   "main": "desk.js",
@@ -21,6 +22,6 @@
   },
   "scripts" : {
     "buildAddons": "node lib/build.js",
-    "start": "electron desk.js"
+    "start": "electron ."
   }
 }

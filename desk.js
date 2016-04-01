@@ -12,7 +12,6 @@ process.argv.forEach(value => {
 	if (value === "debug") debug = true;
 });
 
-electron.app.setName('desk');
 electron.app.on('ready', () => {
 	win = new electron.BrowserWindow({
 		icon: 'node_modules/desk-ui/lib/ui/source/resource/desk/desk.png'
