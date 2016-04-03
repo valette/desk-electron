@@ -13,15 +13,14 @@
   "dependencies": {
     "desk-base": ">0.0.0",
     "desk-ui": ">0.0.0",
-    "electron-prebuilt": ">0.0.0",
-    "shelljs": ">0.0.0"
+    "electron-prebuilt": ">0.0.0"
   },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
   },
   "scripts" : {
-    "buildAddons": "node lib/build.js",
+    "buildAddons": "node node_modules/desk-ui/lib/buildAddons.js",
     "start": "electron ."
   }
 }

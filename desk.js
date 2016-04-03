@@ -1,16 +1,9 @@
 'use strict';
 
-const actions  = require('desk-base'),
-      electron = require('electron'),
-      libPath  = require('path'),
-      os       = require('os');
+const electron = require('electron')
+const debug = process.argv[2] === "debug";
 
-let win,
-    debug;
-
-process.argv.forEach(value => {
-	if (value === "debug") debug = true;
-});
+let win;
 
 electron.app.on('ready', () => {
 	win = new electron.BrowserWindow({
@@ -22,7 +15,7 @@ electron.app.on('ready', () => {
 		+ '/index.html';
 
 	win.loadURL(url);
-
+	win.maximize();
 	win.on('closed', () => {win = null;});
 })
 .on('window-all-closed', () => {
@@ -39,24 +32,3 @@ electron.app.on('ready', () => {
 		createWindow();
 	}
 });
-
-actions.include(__dirname + '/lib/includes');
-
-electron.ipcMain.on('getRootDir', (e) => {
-	e.returnValue = libPath.join(os.homedir(), 'desk') + '/';
-})
-.on('action', (event, parameters) => {
-	actions.execute(parameters, (response) => {
-		event.sender.send("action finished", response);
-	});
-})
-.on('setEmitLog', (event, bool) => {
-	actions.setEmitLog(bool);
-});
-
-actions.on("log", console.log.bind(console));
-actions.oldEmit = actions.emit;
-actions.emit = (event, message) => {
-	actions.oldEmit(event, message);
-	if (win) win.webContents.send(event, message);
-}
