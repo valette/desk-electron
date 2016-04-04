@@ -1,7 +1,7 @@
 'use strict';
 
-const electron = require('electron')
-const debug = process.argv[2] === "debug";
+const electron = require('electron'),
+      debug = process.argv[2] === "debug";
 
 let win;
 
@@ -15,6 +15,7 @@ electron.app.on('ready', () => {
 		+ '/index.html';
 
 	win.loadURL(url);
+	if (debug) win.webContents.openDevTools();
 	win.maximize();
 	win.on('closed', () => {win = null;});
 })
