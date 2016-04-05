@@ -7,7 +7,7 @@ let win;
 
 electron.app.on('ready', () => {
 	win = new electron.BrowserWindow({
-		icon: 'node_modules/desk-ui/lib/ui/source/resource/desk/desk.png'
+		icon: 'node_modules/desk-ui/source/resource/desk/desk.png'
 	});
 
 	var url = 'file://' + __dirname + '/node_modules/desk-ui/'
