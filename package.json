@@ -21,6 +21,8 @@
   },
   "scripts" : {
     "buildAddons": "node node_modules/desk-ui/source/buildAddons.js",
-    "start": "electron ."
+    "start": "electron .",
+    "buildLinux" : " rm -rf desk-linux-x64* && electron-packager ./ --platform=linux --arch=x64",
+    "bundleLinux" : "tar jcvf desk-linux-x64.tar.bz2 desk-linux-x64"
   }
 }
