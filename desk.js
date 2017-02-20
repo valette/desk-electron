@@ -3,6 +3,8 @@
 const electron = require('electron'),
       debug = process.argv[2] === "debug";
 
+//require( 'electron-debug' )( { enabled : true, showDevTools : true } );
+
 let win;
 
 electron.app.on('ready', () => {
@@ -17,7 +19,9 @@ electron.app.on('ready', () => {
 	win.loadURL(url);
 	if (debug) win.webContents.openDevTools();
 	win.maximize();
-	win.on('closed', () => {win = null;});
+	win.on('close', () => {
+		process.exit();
+	});
 
 	var promptResponse
 	electron.ipcMain.on('prompt', function(eventRet, arg) {

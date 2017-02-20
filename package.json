@@ -1,8 +1,8 @@
 {
   "name": "desk-electron",
-  "productName" : "desk",
+  "productName": "desk",
   "description": "electron.js version of DESK",
-  "license" : "CECILL-B",
+  "license": "CECILL-B",
   "main": "desk.js",
   "author": "Sebastien Valette <sebastien.valette@creatis.insa-lyon.fr> (http://www.creatis.insa-lyon.fr/~valette)",
   "version": "0.3.0",
@@ -13,16 +13,25 @@
   "dependencies": {
     "desk-base": ">0.0.0",
     "desk-ui": ">0.0.0",
-    "electron-prebuilt": ">0.0.0"
+    "electron": ">0.0.0",
+    "electron-debug": ">0.0.0",
+    "electron-packager": ">0.0.0"
   },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
   },
-  "scripts" : {
+  "scripts": {
     "buildAddons": "node node_modules/desk-ui/source/buildAddons.js",
     "start": "electron .",
-    "buildLinux" : " rm -rf desk-linux-x64* && electron-packager ./ --platform=linux --arch=x64",
-    "bundleLinux" : "tar jcvf desk-linux-x64.tar.bz2 desk-linux-x64"
+    "bundleLinux": "tar jcvf desk-linux-x64.tar.bz2 desk-linux-x64",
+    "clean": "rm -rf desk-*",
+    "package": "electron-packager ./ --all",
+    "zipLinux": "zip -r desk-linux-x64.zip desk-linux-x64",
+    "zipArmv7l": "zip -r desk-linux-armv7l.zip desk-linux-armv7l",
+    "zipWindows": "zip -r desk-win32-x64.zip desk-win32-x64",
+    "zipDarwin": "zip -r desk-darwin-x64.zip desk-darwin-x64",
+    "zip": "npm run zipLinux && npm run zipArmv7l && npm run zipWindows && npm run zipDarwin",
+    "build": "npm run clean && npm run package && npm run zip"
   }
 }
