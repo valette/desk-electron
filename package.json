@@ -24,14 +24,14 @@
   "scripts": {
     "buildAddons": "node node_modules/desk-ui/source/buildAddons.js",
     "start": "electron .",
-    "bundleLinux": "tar jcvf desk-linux-x64.tar.bz2 desk-linux-x64",
     "clean": "rm -rf desk-*",
     "package": "electron-packager ./ --all",
     "zipLinux": "zip -r desk-linux-x64.zip desk-linux-x64",
     "zipArmv7l": "zip -r desk-linux-armv7l.zip desk-linux-armv7l",
-    "zipWindows": "zip -r desk-win32-x64.zip desk-win32-x64",
+    "zipWin64": "zip -r desk-win32-x64.zip desk-win32-x64",
+    "zipWin32": "zip -r desk-win32-ia32.zip desk-win32-ia32",
     "zipDarwin": "zip -r desk-darwin-x64.zip desk-darwin-x64",
-    "zip": "npm run zipLinux && npm run zipArmv7l && npm run zipWindows && npm run zipDarwin",
+    "zip": "npm run zipLinux && npm run zipArmv7l && npm run zipWin32 && npm run zipWin64 && npm run zipDarwin",
     "build": "npm run clean && npm run package && npm run zip"
   }
 }
