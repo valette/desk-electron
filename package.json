@@ -11,11 +11,11 @@
     "url": "git://github.com/valette/desk-electron.git"
   },
   "dependencies": {
-    "desk-base": "1.0.2",
+    "desk-base": "1.0.3",
     "desk-ui": "1.0.1",
-    "electron": "1.7.9",
-    "electron-debug": "1.4.0",
-    "electron-packager": "9.1.0"
+    "electron": "1.7.11",
+    "electron-debug": "1.5.0",
+    "electron-packager": "10.1.1"
   },
   "optionalDependencies": {},
   "engines": {
