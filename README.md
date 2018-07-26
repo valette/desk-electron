@@ -9,7 +9,7 @@ The aim of the project is to create a remote desktop for visualization and proce
 
 a live demo is visible here: [https://desk.creatis.insa-lyon.fr/demo/](https://desk.creatis.insa-lyon.fr/demo/)
 
-more infos? Click here [http://www.creatis.insa-lyon.fr/site/fr/desk](http://www.creatis.insa-lyon.fr/site/fr/desk)
+more infos? Click here [http://www.creatis.insa-lyon.fr/~valette/desk.html](http://www.creatis.insa-lyon.fr/~valette/desk.html)
 
 ### License ###
 CeCILL-B (BSD-compatible), if you use this code for academic purposes, please cite this article:
