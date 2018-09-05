@@ -6,6 +6,7 @@ const electron = require('electron'),
 //require( 'electron-debug' )( { enabled : true, showDevTools : true } );
 
 let win;
+electron.app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true')
 
 electron.app.on('ready', () => {
 	win = new electron.BrowserWindow({
