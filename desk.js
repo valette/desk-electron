@@ -10,11 +10,12 @@ electron.app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true')
 
 electron.app.on('ready', () => {
 	win = new electron.BrowserWindow({
-		icon: 'node_modules/desk-ui/source/resource/desk/desk.png'
+		icon: 'node_modules/desk-ui/source/resource/desk/desk.png',
+		webPreferences: { nodeIntegration: true }
 	});
 
 	var url = 'file://' + __dirname + '/node_modules/desk-ui/'
-		+ (debug ? 'source' : 'build')
+		+ (debug ? 'source-output' : 'build')
 		+ '/index.html';
 
 	win.loadURL(url);
