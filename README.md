@@ -1,7 +1,7 @@
 desk
 ====
 
-#### Remote desktop for medical imaging - sTANDALONE VERSION####
+#### Remote desktop for medical imaging - standalone version ####
 
 The aim of the project is to create a remote desktop for visualization and processing of medical images. Only works under linux or Mac OS, but patches are welcome!
 
