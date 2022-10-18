@@ -2,24 +2,21 @@
 
 const electron = require('electron'),
       debug    = process.argv[2] === "debug",
-      fs       = require('fs'),
-      join     = require('path').join;
-
-//require( 'electron-debug' )( { enabled : true, showDevTools : true } );
+      fs       = require('fs');
 
 electron.app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true');
-electron.Menu.setApplicationMenu( null );
+if ( !debug ) electron.Menu.setApplicationMenu( null );
 
-const rootPath = join( "file://", __dirname, "node_modules/desk-ui" );
-const basePath = join( rootPath, debug ? 'compiled/source/' : 'compiled/dist/' );
+const rootPath = __dirname + "/node_modules/desk-ui/";
+const basePath = rootPath + ( debug ? 'compiled/source/' : 'compiled/dist/' );
 
 let win;
 
 electron.app.on('ready', () => {
 
-
 	win = new electron.BrowserWindow({
-		icon: 'basePath + "resource/desk/desk.png',
+		icon: basePath + "resource/desk/desk_logo.png",
+		title:'desk',
 		webPreferences: {
 			nodeIntegration: true,
 			enableRemoteModule: true,
@@ -27,8 +24,7 @@ electron.app.on('ready', () => {
 		}
 	});
 
-	const url = basePath + 'index.html';
-	win.loadURL(url);
+	win.loadURL( "file://" + basePath + 'index.html' );
 	if (debug) win.webContents.openDevTools();
 	win.maximize();
 	win.on('close', () => {

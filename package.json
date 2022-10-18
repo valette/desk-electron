@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "desk-base": "1.7.1",
-    "desk-ui": "3.0.1"
+    "desk-ui": "3.0.2"
   },
   "devDependencies": {
     "electron": "21.1.1",
@@ -24,16 +24,12 @@
     "node": "*"
   },
   "scripts": {
+    "build": "npm run clean && npm run package && npm run zip",
     "buildAddons": "node node_modules/desk-ui/source/buildAddons.js",
     "start": "electron .",
     "clean": "rm -rf desk-*",
-    "package": "electron-packager ./ --all",
-    "zipLinux": "zip -r desk-linux-x64.zip desk-linux-x64",
-    "zipArmv7l": "zip -r desk-linux-armv7l.zip desk-linux-armv7l",
-    "zipWin64": "zip -r desk-win32-x64.zip desk-win32-x64",
-    "zipWin32": "zip -r desk-win32-ia32.zip desk-win32-ia32",
-    "zipDarwin": "zip -r desk-darwin-x64.zip desk-darwin-x64",
+    "package": "electron-packager --omit=dev --arch x64,arm64 --platform darwin,linux,mas,win32 --overwrite --prune=true --icon=node_modules/desk-ui/source/resource/desk/desk.ico --azar=true ./",
     "zip": "npm run zipLinux && npm run zipArmv7l && npm run zipWin32 && npm run zipWin64 && npm run zipDarwin",
-    "build": "npm run clean && npm run package && npm run zip"
+    "zip": "for i in ./desk-*; do zip -rqy \"${i%/}.zip\" \"$i\"; done"
   }
 }
